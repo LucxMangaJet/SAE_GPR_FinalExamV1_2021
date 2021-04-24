@@ -11,7 +11,7 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform castLocationTransform;
-    [SerializeField] private ProjectileSpellDescription primarySpell;
+    [SerializeField] private InstantiatedSpellDescription primarySpell;
     [SerializeField] private SpellDescription secondarySpell;
     [SerializeField] private DropCollector dropCollector;
 
@@ -69,7 +69,7 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
     private void Cast(SpellSlot slot, SpellDescription descr)
     {
-        if(descr is ProjectileSpellDescription proj)
+        if(descr is InstantiatedSpellDescription proj)
         {
             StartCoroutine(CastProjectileSpellRoutine(slot, proj));
         }
@@ -80,22 +80,22 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
         }
     }
 
-    private IEnumerator CastProjectileSpellRoutine(SpellSlot slot, ProjectileSpellDescription spell)
+    private IEnumerator CastProjectileSpellRoutine(SpellSlot slot, InstantiatedSpellDescription spell)
     {
         SpellCast?.Invoke(slot, spell);
         inAction = true;
         animator.SetTrigger(spell.AnimationVariableName);
 
-        yield return new WaitForSeconds(spell.ProjectileSpawnDelay);
+        yield return new WaitForSeconds(spell.PrefabSpawnDelay);
 
-        var projectile = Instantiate(spell.ProjectilePrefab, castLocationTransform.position, castLocationTransform.rotation);
+        var projectile = Instantiate(spell.PrefabToInstantiate, castLocationTransform.position, castLocationTransform.rotation);
         //inject damage
         if(projectile.TryGetComponent(out ISpellSpawnedBehaviour behavior))
         {
             behavior.SetDamage(spell.DamageDealt);
         }
 
-        yield return new WaitForSeconds(spell.Duration - spell.ProjectileSpawnDelay);
+        yield return new WaitForSeconds(spell.Duration - spell.PrefabSpawnDelay);
 
         switch (slot)
         {
