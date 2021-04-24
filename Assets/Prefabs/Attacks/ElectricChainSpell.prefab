@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1884f87ad86178943a2b6ed2ce68ec19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialMaxDistance: 10
+  maxBounceRadius: 5
+  maxBounceCount: 4
+  distanceConsideredHit: 0.3
+  speed: 5
+  hitOffset: {x: 0, y: 1, z: 0}
+  particlesOnHit: {fileID: 100002, guid: 75369bb81385f4904842bf20a51c14a2, type: 3}
 --- !u!1001 &4138695083707981597
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public interface IEnemy
 {
     void InjectTargetingManager(AiTargetingManager inhectedTargetingManager);
     void InjectDropSpawner(DropSpawner injectedDropSpawner);
+
+    public Transform transform { get; }
 }
 
 
@@ -25,7 +27,7 @@ public class RunnerBehaviour : MonoBehaviour, IEnemy
 
     [SerializeField] private NavMeshAgent navMeshAgent;
 
-    [FormerlySerializedAs("heathComponent")] 
+    [FormerlySerializedAs("heathComponent")]
     [SerializeField] private HealthComponent healthComponent;
 
     [Header("Injected")]
@@ -46,7 +48,13 @@ public class RunnerBehaviour : MonoBehaviour, IEnemy
         Debug.Assert(targetingManager != null, "TargetingManager not injected or referenced.");
         target = targetingManager.GetDefaultAITarget();
         navMeshAgent.SetDestination(target.position);
+        targetingManager.RegisterEnemy(this);
 
+    }
+    private void OnDestroy()
+    {
+        if (targetingManager)
+            targetingManager.RemoveEnemy(this);
     }
 
     private void Update()
@@ -88,16 +96,21 @@ public class RunnerBehaviour : MonoBehaviour, IEnemy
         animator.SetBool(IS_HIT_ANIMATOR_ID, true);
         navMeshAgent.isStopped = true;
         yield return new WaitForSeconds(1);
-        animator.SetBool(IS_HIT_ANIMATOR_ID, false);
-        navMeshAgent.isStopped = false;
+
+        if (healthComponent.IsAlive)
+        {
+            animator.SetBool(IS_HIT_ANIMATOR_ID, false);
+            navMeshAgent.isStopped = false;
+        }
     }
 
-    public void InjectTargetingManager(AiTargetingManager injectedTargetingManager) 
+    public void InjectTargetingManager(AiTargetingManager injectedTargetingManager)
     {
         targetingManager = injectedTargetingManager;
+
     }
 
-    public void InjectDropSpawner(DropSpawner injectedDropSpawner) 
+    public void InjectDropSpawner(DropSpawner injectedDropSpawner)
     {
         dropSpawner = injectedDropSpawner;
     }

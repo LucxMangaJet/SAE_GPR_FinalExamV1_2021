@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: SimpleLizardLoot
   m_EditorClassIdentifier: 
   drops:
+  - Drop: {fileID: 11400000, guid: 869a260729164b94d833c52d3dc0d41f, type: 2}
+    Probability: 0.35
+  - Drop: {fileID: 11400000, guid: 0bde8caaa21dbb0469af86af5120360f, type: 2}
+    Probability: 0.35
+  - Drop: {fileID: 11400000, guid: 167777e5fc6cc0146b5ed1d642f14287, type: 2}
+    Probability: 0.1
+  - Drop: {fileID: 11400000, guid: 34701a525cba17544a37ab7670283681, type: 2}
+    Probability: 0.1
   - Drop: {fileID: 11400000, guid: 2eaaedaeefd09bc48b5c70b4664ec976, type: 2}
-    Probability: 1
+    Probability: 0.1
