@@ -14,6 +14,7 @@ public class SpellSlotUI : MonoBehaviour
     public void SetSprite(Sprite s)
     {
         spellIcon.sprite = s;
+        spellActive.enabled = false;
     }
 
     public void StartSpellCastUIEffect(SpellDescription spell)

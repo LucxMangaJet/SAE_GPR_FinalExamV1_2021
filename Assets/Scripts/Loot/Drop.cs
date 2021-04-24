@@ -9,6 +9,7 @@ public interface IDropOwner
 [CreateAssetMenu]
 public class Drop : ScriptableObject
 {
+    [Header("Drop")]
     public string DropName;
 
     [TextArea(5,10)]

@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252509904}
   m_LocalRotation: {x: 0.17347227, y: 0.9262395, z: -0.050623212, w: 0.33079463}
-  m_LocalPosition: {x: 0.24900055, y: 1.86208, z: -1.8854713}
+  m_LocalPosition: {x: 0.24900001, y: 1.86208, z: -1.8854719}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 759380047}
@@ -2115,7 +2115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7111353289441474563}
   castLocationTransform: {fileID: 1025611270}
-  simpleAttackSpell: {fileID: 11400000, guid: fdae951968a3690458af55414ccaaba8, type: 2}
+  primarySpell: {fileID: 11400000, guid: fdae951968a3690458af55414ccaaba8, type: 2}
+  dropCollector: {fileID: 6684469488064594396}
 --- !u!114 &919132148507359903
 MonoBehaviour:
   m_ObjectHideFlags: 0

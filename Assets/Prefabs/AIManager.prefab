@@ -94,6 +94,8 @@ MonoBehaviour:
     Prefab: {fileID: 6626881115370625022, guid: a038070aaf4a21f4b952909ebebb2ade, type: 3}
   - Drop: {fileID: 11400000, guid: 0bde8caaa21dbb0469af86af5120360f, type: 2}
     Prefab: {fileID: 812510393989137677, guid: d6453b276e3a3464a879fce26c66e2b8, type: 3}
+  - Drop: {fileID: 11400000, guid: 167777e5fc6cc0146b5ed1d642f14287, type: 2}
+    Prefab: {fileID: 6076889043539867730, guid: aaab296b06e39be4fb04de263ce62ae3, type: 3}
   dropsParent: {fileID: 4465300345308504376}
 --- !u!1 &9197474405910472430
 GameObject:
@@ -119,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9197474405910472430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.982, y: 0.96, z: 47.699}
+  m_LocalPosition: {x: 0.2, y: 0.96, z: -10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9197474405759586917}

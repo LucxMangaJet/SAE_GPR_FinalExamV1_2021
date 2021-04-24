@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,19 +11,42 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform castLocationTransform;
-    [SerializeField] private ProjectileSpellDescription simpleAttackSpell;
+    [SerializeField] private ProjectileSpellDescription primarySpell;
+    [SerializeField] private DropCollector dropCollector;
 
 
     private bool inAction;
-    private float lastSimpleAttackTimestamp = -100;
+    private float lastPrimarySpellTimestamp = -100;
+    private float lastSecondarySpellTimestamp = -100;
+    private SpellDescription secondarySpell;
 
-    public SpellDescription SimpleAttackSpellDescription { get => simpleAttackSpell; }
+
+    public SpellDescription PrimarySpell { get => primarySpell; }
+    public SpellDescription SecondarySpell { get => secondarySpell; }
 
     public event System.Action<SpellSlot, SpellDescription> SpellCast;
+    public event System.Action<SpellSlot, SpellDescription> EquippedSpellChanged;
 
     private void Start()
     {
-        Debug.Assert(simpleAttackSpell, "No spell assigned to SpellCastingController.");
+        Debug.Assert(primarySpell, "No spell assigned to SpellCastingController.");
+        Debug.Assert(dropCollector, "No drop collector referenced in SpellCastingController.");
+
+        dropCollector.DropCollected += OnDropCollected;
+
+    }
+
+    private void OnDropCollected(Drop drop)
+    {
+        //picked up a spell drop
+        if (drop is SpellDrop spellDrop)
+        {
+            if (spellDrop.SpellContained)
+            {
+                secondarySpell = spellDrop.SpellContained;
+                EquippedSpellChanged?.Invoke(SpellSlot.Secondary, secondarySpell);
+            }
+        }
     }
 
     void Update()
@@ -32,40 +56,73 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
         if (!inAction)
         {
-            if (simpleAttack && GetSimpleAttackCooldown() == 0)
+            if (simpleAttack && GetPrimarySpellCooldown() == 0)
             {
-                StartCoroutine(SimpleAttackRoutine());
+                Cast(SpellSlot.Primary, primarySpell);
             }
-            else if (specialAttack)
+            else if (specialAttack && secondarySpell && GetSecondarySpellCooldown() == 0)
             {
-                Debug.Log("Trigger special attack");
+                Cast(SpellSlot.Secondary, secondarySpell);
             }
         }
     }
 
-    private IEnumerator SimpleAttackRoutine()
+    private void Cast(SpellSlot slot, SpellDescription descr)
     {
-        SpellCast?.Invoke(SpellSlot.Primary, SimpleAttackSpellDescription);
+        if(descr is ProjectileSpellDescription proj)
+        {
+            StartCoroutine(CastProjectileSpellRoutine(slot, proj));
+        }
+        else
+        {
+            StartCoroutine(CastDefaultSpellRoutine(slot, descr));
+        }
+    }
+
+    private IEnumerator CastProjectileSpellRoutine(SpellSlot slot, ProjectileSpellDescription spell)
+    {
+        SpellCast?.Invoke(slot, spell);
         inAction = true;
-        animator.SetTrigger(simpleAttackSpell.AnimationVariableName);
+        animator.SetTrigger(spell.AnimationVariableName);
 
-        yield return new WaitForSeconds(simpleAttackSpell.ProjectileSpawnDelay);
+        yield return new WaitForSeconds(spell.ProjectileSpawnDelay);
 
-        Instantiate(simpleAttackSpell.ProjectilePrefab, castLocationTransform.position, castLocationTransform.rotation);
+        Instantiate(spell.ProjectilePrefab, castLocationTransform.position, castLocationTransform.rotation);
 
-        yield return new WaitForSeconds(simpleAttackSpell.Duration - simpleAttackSpell.ProjectileSpawnDelay);
+        yield return new WaitForSeconds(spell.Duration - spell.ProjectileSpawnDelay);
 
-        lastSimpleAttackTimestamp = Time.time;
+        switch (slot)
+        {
+            case SpellSlot.Primary:
+                lastPrimarySpellTimestamp = Time.time;
+                break;
+            case SpellSlot.Secondary:
+                lastSecondarySpellTimestamp = Time.time;
+                break;
+        }
+
         inAction = false;
     }
+
+    private IEnumerator CastDefaultSpellRoutine(SpellSlot slot, SpellDescription description)
+    {
+        yield return null;
+    }
+
 
     public bool IsInAction()
     {
         return inAction;
     }
 
-    public float GetSimpleAttackCooldown()
+    public float GetPrimarySpellCooldown()
     {
-        return Mathf.Max(0, lastSimpleAttackTimestamp + simpleAttackSpell.Cooldown - Time.time);
+        return Mathf.Max(0, lastPrimarySpellTimestamp + primarySpell.Cooldown - Time.time);
+    }
+
+    public float GetSecondarySpellCooldown()
+    {
+        if (!secondarySpell) return 0;
+        return Mathf.Max(0, lastSecondarySpellTimestamp + secondarySpell.Cooldown - Time.time);
     }
 }

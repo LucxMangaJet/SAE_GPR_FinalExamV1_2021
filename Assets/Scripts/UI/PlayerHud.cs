@@ -14,7 +14,7 @@ public class PlayerHud : MonoBehaviour
     [SerializeField] private SpellCastingController spellCastingController;
     [SerializeField] private DropCollector dropCollector;
 
-    [SerializeField] private SpellSlotUI primarySpell;
+    [SerializeField] private SpellSlotUI primarySpell, secondarySpell;
 
     [Header("Drop Collection")]
     [SerializeField] private GameObject collectUIObject;
@@ -31,14 +31,15 @@ public class PlayerHud : MonoBehaviour
         Debug.Assert(spellCastingController != null, "SpellCastingController reference is null");
         Debug.Assert(dropCollector != null, "DropCollector reference is null");
 
-        primarySpell.SetSprite(spellCastingController.SimpleAttackSpellDescription.SpellIcon);
+        primarySpell.SetSprite(spellCastingController.PrimarySpell.SpellIcon);
         dropCollectedText.text = "";
 
         dropCollector.DropsInRangeChanged += OnDropsInRangeChanged;
         dropCollector.DropCollected += OnDropCollected;
-        spellCastingController.SpellCast += OnSpellCast;
-    }
 
+        spellCastingController.SpellCast += OnSpellCast;
+        spellCastingController.EquippedSpellChanged += OnSpellChanged;
+    }
 
 
     private void OnDropCollected(Drop obj)
@@ -80,22 +81,29 @@ public class PlayerHud : MonoBehaviour
                 primarySpell.StartSpellCastUIEffect(spell);
                 break;
             case SpellSlot.Secondary:
-
+                secondarySpell.StartSpellCastUIEffect(spell);
                 break;
 
             default:
                 Debug.LogWarning($"Unimplemented UI effect for spellSlot {spellSlot}");
                 break;
         }
-
-
     }
 
+
+    private void OnSpellChanged(SpellSlot slot, SpellDescription spell)
+    {
+        SpellSlotUI ui = slot == SpellSlot.Primary ? primarySpell : secondarySpell;
+        ui.SetSprite(spell.SpellIcon);
+    }
 
 
     private void Update()
     {
-        float cooldown = spellCastingController.GetSimpleAttackCooldown();
+        float cooldown = spellCastingController.GetPrimarySpellCooldown();
         primarySpell.UpdateCooldown(cooldown);
+
+        cooldown = spellCastingController.GetSecondarySpellCooldown();
+        secondarySpell.UpdateCooldown(cooldown);
     }
 }
