@@ -669,10 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellCastingController: {fileID: 0}
   dropCollector: {fileID: 0}
-  spellParent: {fileID: 9194845279382252213}
-  spellIcon: {fileID: 9194845278699064330}
-  spellActive: {fileID: 8527864079201723400}
-  spellCooldownText: {fileID: 9194845278869666556}
+  primarySpell: {fileID: 9000231742414039774}
   collectUIObject: {fileID: 3004304138699341551}
   dropCollectedText: {fileID: 766472638488082471}
   dropCollectedSizeOverTime:
@@ -743,8 +740,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9194845279382252213}
   - component: {fileID: 9194845279382252218}
+  - component: {fileID: 9000231742414039774}
   m_Layer: 5
-  m_Name: AbilityCooldown
+  m_Name: PrimaryAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -780,3 +778,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9194845279382252214}
   m_CullTransparentMesh: 1
+--- !u!114 &9000231742414039774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194845279382252214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a54fa81cc3c7b947ab770ff20b16a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellParent: {fileID: 9194845279382252213}
+  spellIcon: {fileID: 9194845278699064330}
+  spellActive: {fileID: 8527864079201723400}
+  spellCooldownText: {fileID: 9194845278869666556}

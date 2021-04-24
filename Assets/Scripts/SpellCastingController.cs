@@ -18,7 +18,7 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
     public SpellDescription SimpleAttackSpellDescription { get => simpleAttackSpell; }
 
-    public event System.Action<SpellDescription> SpellCast;
+    public event System.Action<SpellSlot, SpellDescription> SpellCast;
 
     private void Start()
     {
@@ -45,7 +45,7 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
     private IEnumerator SimpleAttackRoutine()
     {
-        SpellCast?.Invoke(SimpleAttackSpellDescription);
+        SpellCast?.Invoke(SpellSlot.Primary, SimpleAttackSpellDescription);
         inAction = true;
         animator.SetTrigger(simpleAttackSpell.AnimationVariableName);
 
