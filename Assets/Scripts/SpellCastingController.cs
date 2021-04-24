@@ -75,7 +75,8 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
         }
         else
         {
-            StartCoroutine(CastDefaultSpellRoutine(slot, descr));
+            //What happens when you cast a plane spell Description? The spell description includes no behaviour;
+            Debug.LogError("SpellcastError: Cannot cast a plane SpellDescription");
         }
     }
 
@@ -103,12 +104,6 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
         inAction = false;
     }
-
-    private IEnumerator CastDefaultSpellRoutine(SpellSlot slot, SpellDescription description)
-    {
-        yield return null;
-    }
-
 
     public bool IsInAction()
     {

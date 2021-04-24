@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu]
 public class SpellDescription : ScriptableObject
 {
     [Header("Spell Description")]
