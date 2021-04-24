@@ -8,7 +8,9 @@ public class PlayerHud : MonoBehaviour
     [SerializeField] private SpellCastingController spellCastingController;
     [SerializeField] private DropCollector dropCollector;
 
+    [SerializeField] private Transform spellParent;
     [SerializeField] private Image spellIcon;
+    [SerializeField] private Image spellActive;
     [SerializeField] private TMPro.TMP_Text spellCooldownText;
 
 
@@ -21,6 +23,7 @@ public class PlayerHud : MonoBehaviour
 
     private Coroutine dropCollectedEffectRoutine;
 
+
     private void Start()
     {
         Debug.Assert(spellCastingController != null, "SpellCastingController reference is null");
@@ -31,7 +34,10 @@ public class PlayerHud : MonoBehaviour
 
         dropCollector.DropsInRangeChanged += OnDropsInRangeChanged;
         dropCollector.DropCollected += OnDropCollected;
+        spellCastingController.SpellCast += OnSpellCast;
     }
+
+
 
     private void OnDropCollected(Drop obj)
     {
@@ -62,6 +68,37 @@ public class PlayerHud : MonoBehaviour
     private void OnDropsInRangeChanged()
     {
         collectUIObject.SetActive(dropCollector.DropsInRangeCount > 0);
+    }
+
+    private void OnSpellCast(SpellDescription spell)
+    {
+        StartCoroutine(SpellCastUIRoutine(spell));
+    }
+
+    private IEnumerator SpellCastUIRoutine(SpellDescription spell)
+    {
+        spellActive.enabled = true;
+        Vector3 maxSize = new Vector3(spell.UIInCastMaxSize, spell.UIInCastMaxSize, spell.UIInCastMaxSize);
+
+        //Scale up
+        for (float t = 0; t < spell.Duration;)
+        {
+
+            spellParent.localScale = Vector3.Lerp(Vector3.one, maxSize, t / spell.Duration);
+            yield return null;
+            t += Time.deltaTime;
+        }
+        spellParent.localScale = maxSize;
+        spellActive.enabled = false;
+
+        //Shrink
+        for (float t = 0; t < spell.UIShrinkDuration;)
+        {
+            spellParent.localScale = Vector3.Lerp( maxSize, Vector3.one, t / spell.UIShrinkDuration);
+            yield return null;
+            t += Time.deltaTime;
+        }
+        spellParent.localScale = Vector3.one;
     }
 
     private void Update()

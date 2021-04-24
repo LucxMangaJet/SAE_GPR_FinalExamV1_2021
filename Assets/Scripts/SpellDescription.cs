@@ -14,4 +14,8 @@ public class SpellDescription : ScriptableObject
     public float Duration;
     public float Cooldown;
     public string AnimationVariableName;
+
+    [Header("UI")]
+    public float UIInCastMaxSize = 1;
+    public float UIShrinkDuration = 0.3f;
 }

@@ -18,6 +18,8 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
     public SpellDescription SimpleAttackSpellDescription { get => simpleAttackSpell; }
 
+    public event System.Action<SpellDescription> SpellCast;
+
     private void Start()
     {
         Debug.Assert(simpleAttackSpell, "No spell assigned to SpellCastingController.");
@@ -43,6 +45,7 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
     private IEnumerator SimpleAttackRoutine()
     {
+        SpellCast?.Invoke(SimpleAttackSpellDescription);
         inAction = true;
         animator.SetTrigger(simpleAttackSpell.AnimationVariableName);
 

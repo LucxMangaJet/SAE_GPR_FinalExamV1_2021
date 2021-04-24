@@ -20,5 +20,7 @@ MonoBehaviour:
   Duration: 0.5
   Cooldown: 0.75
   AnimationVariableName: SimpleAttack
+  UIInCastMaxSize: 1.1
+  UIShrinkDuration: 0.1
   ProjectilePrefab: {fileID: 428208472238148140, guid: 8f137eecfdb312b4ba2dfd66eda62da3, type: 3}
   ProjectileSpawnDelay: 0.375
