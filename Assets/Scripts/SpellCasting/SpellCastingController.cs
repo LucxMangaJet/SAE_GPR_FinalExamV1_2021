@@ -12,13 +12,13 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
     [SerializeField] private Animator animator;
     [SerializeField] private Transform castLocationTransform;
     [SerializeField] private ProjectileSpellDescription primarySpell;
+    [SerializeField] private SpellDescription secondarySpell;
     [SerializeField] private DropCollector dropCollector;
 
 
     private bool inAction;
     private float lastPrimarySpellTimestamp = -100;
     private float lastSecondarySpellTimestamp = -100;
-    private SpellDescription secondarySpell;
 
 
     public SpellDescription PrimarySpell { get => primarySpell; }

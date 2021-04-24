@@ -32,6 +32,8 @@ public class PlayerHud : MonoBehaviour
         Debug.Assert(dropCollector != null, "DropCollector reference is null");
 
         primarySpell.SetSprite(spellCastingController.PrimarySpell.SpellIcon);
+        if (spellCastingController.SecondarySpell)
+            secondarySpell.SetSprite(spellCastingController.SecondarySpell.SpellIcon);
         dropCollectedText.text = "";
 
         dropCollector.DropsInRangeChanged += OnDropsInRangeChanged;

@@ -94,6 +94,8 @@ MonoBehaviour:
     Prefab: {fileID: 6626881115370625022, guid: a038070aaf4a21f4b952909ebebb2ade, type: 3}
   - Drop: {fileID: 11400000, guid: 0bde8caaa21dbb0469af86af5120360f, type: 2}
     Prefab: {fileID: 812510393989137677, guid: d6453b276e3a3464a879fce26c66e2b8, type: 3}
+  - Drop: {fileID: 11400000, guid: be7bda1d216c8e24aac9d9ac926f2384, type: 2}
+    Prefab: {fileID: 6076889043539867730, guid: aaab296b06e39be4fb04de263ce62ae3, type: 3}
   - Drop: {fileID: 11400000, guid: 167777e5fc6cc0146b5ed1d642f14287, type: 2}
     Prefab: {fileID: 6076889043539867730, guid: aaab296b06e39be4fb04de263ce62ae3, type: 3}
   dropsParent: {fileID: 4465300345308504376}
