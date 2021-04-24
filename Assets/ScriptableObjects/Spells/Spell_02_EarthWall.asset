@@ -18,8 +18,8 @@ MonoBehaviour:
   Duration: 1
   Cooldown: 4
   AnimationVariableName: ChannelUp
-  UIInCastMaxSize: 1
+  UIInCastMaxSize: 1.4
   UIShrinkDuration: 0.3
-  ProjectilePrefab: {fileID: 5094715679480371996, guid: d3458f3e0140b86488d317124906220b, type: 3}
-  ProjectileSpawnDelay: 1
+  PrefabToInstantiate: {fileID: 5094715679480371996, guid: d3458f3e0140b86488d317124906220b, type: 3}
+  PrefabSpawnDelay: 1
   DamageDealt: 100

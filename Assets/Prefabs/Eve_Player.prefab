@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025611269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.369, y: 1.11, z: 0.764}
+  m_LocalPosition: {x: 0.24, y: 1.11, z: 0.764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7294181437124901707}
@@ -2116,6 +2116,7 @@ MonoBehaviour:
   animator: {fileID: 7111353289441474563}
   castLocationTransform: {fileID: 1025611270}
   primarySpell: {fileID: 11400000, guid: fdae951968a3690458af55414ccaaba8, type: 2}
+  secondarySpell: {fileID: 0}
   dropCollector: {fileID: 6684469488064594396}
 --- !u!114 &919132148507359903
 MonoBehaviour:
