@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropName: Lizard Soul
   Description: 
+  PickupText: You feel strengthened by absorbing a soul
   Rarity: 1
-  Icon: {fileID: 21300000, guid: 21118b555a61b4a409ec20ba884cbcda, type: 3}

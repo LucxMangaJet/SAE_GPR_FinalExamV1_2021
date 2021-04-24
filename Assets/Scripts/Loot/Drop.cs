@@ -14,6 +14,9 @@ public class Drop : ScriptableObject
     [TextArea(5,10)]
     public string Description;
 
+    [TextArea(2,5)]
+    public string PickupText;
+
     public DropRarity Rarity;
 }
 
