@@ -1435,9 +1435,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 50b9bde3837fc9b4796505ed4336e750, type: 2}
   skinRenderer: {fileID: 642376241215143306}
   animator: {fileID: 642376241210884940}
+  _collider: {fileID: 1617938265}
   lootDescription: {fileID: 11400000, guid: 35277d1dd17260343bde1dcecb9b9296, type: 2}
   navMeshAgent: {fileID: 642376241880889023}
-  heathComponent: {fileID: 1600695042952418558}
+  healthComponent: {fileID: 1600695042952418558}
   targetingManager: {fileID: 0}
   dropSpawner: {fileID: 0}
 --- !u!114 &1600695042952418558
