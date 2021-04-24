@@ -10,6 +10,7 @@ public class EarthWallSpell : MonoBehaviour, ISpellSpawnedBehaviour
     [SerializeField] float growDuration;
     [SerializeField] Vector3 rotationOffset;
     [SerializeField] Rigidbody rigidbody;
+    [SerializeField] GameObject OnCastFailEffect;
 
     bool inGrowth;
 
@@ -30,6 +31,8 @@ public class EarthWallSpell : MonoBehaviour, ISpellSpawnedBehaviour
         }
         else
         {
+            if (OnCastFailEffect)
+                Instantiate(OnCastFailEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

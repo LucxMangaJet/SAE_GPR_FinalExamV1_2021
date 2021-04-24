@@ -52,6 +52,8 @@ public class PlayerHud : MonoBehaviour
         dropCollectedEffectRoutine = StartCoroutine(DropCollectedUIRoutine(obj));
     }
 
+
+    /// TODO: fix: If this coroutine is cancelled mid way thorugh the color gets messed up
     private IEnumerator DropCollectedUIRoutine(Drop obj)
     {
         dropCollectedText.text = obj.PickupText;
@@ -68,6 +70,7 @@ public class PlayerHud : MonoBehaviour
             t += Time.deltaTime;
         }
         dropCollectedText.text = "";
+        dropCollectedText.color = initalColor;
     }
 
     private void OnDropsInRangeChanged()
