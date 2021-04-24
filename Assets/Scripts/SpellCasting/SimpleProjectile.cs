@@ -1,13 +1,19 @@
 using UnityEngine;
 
-public class SimpleProjectile : MonoBehaviour
+
+public interface ISpellSpawnedBehaviour
+{
+    public void SetDamage(float descriptionDamage);
+}
+
+public class SimpleProjectile : MonoBehaviour, ISpellSpawnedBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float velocity;
-    [SerializeField] private float damage;
     [SerializeField] private float selfdestructTime = 10;
     [SerializeField] private GameObject _effectOnHit;
 
+    private float damage = 0;
     private void Start()
     {
         _rigidbody.velocity = transform.forward * velocity;
@@ -24,5 +30,10 @@ public class SimpleProjectile : MonoBehaviour
                 Instantiate(_effectOnHit, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
+    }
+
+    public void SetDamage(float descriptionDamage)
+    {
+        damage = descriptionDamage;
     }
 }

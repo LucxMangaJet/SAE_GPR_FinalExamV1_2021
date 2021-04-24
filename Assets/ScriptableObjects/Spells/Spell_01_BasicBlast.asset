@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe027bb29072f8549ab32d3bf0b20a52, type: 3}
-  m_Name: BasicAttack
+  m_Name: Spell_01_BasicBlast
   m_EditorClassIdentifier: 
   SpellName: ShockBlast
   Description: 'Fires a ball lighting that quickly flies in a straight line.
@@ -24,3 +24,4 @@ MonoBehaviour:
   UIShrinkDuration: 0.1
   ProjectilePrefab: {fileID: 428208472238148140, guid: 8f137eecfdb312b4ba2dfd66eda62da3, type: 3}
   ProjectileSpawnDelay: 0.375
+  DamageDealt: 50

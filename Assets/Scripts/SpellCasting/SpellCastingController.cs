@@ -88,7 +88,12 @@ public class SpellCastingController : MonoBehaviour, IPlayerAction
 
         yield return new WaitForSeconds(spell.ProjectileSpawnDelay);
 
-        Instantiate(spell.ProjectilePrefab, castLocationTransform.position, castLocationTransform.rotation);
+        var projectile = Instantiate(spell.ProjectilePrefab, castLocationTransform.position, castLocationTransform.rotation);
+        //inject damage
+        if(projectile.TryGetComponent(out ISpellSpawnedBehaviour behavior))
+        {
+            behavior.SetDamage(spell.DamageDealt);
+        }
 
         yield return new WaitForSeconds(spell.Duration - spell.ProjectileSpawnDelay);
 
